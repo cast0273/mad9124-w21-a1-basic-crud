@@ -7,3 +7,5 @@ const student = [
     email: 'cast0273@algonquinlive.com'
   }
 ]
+
+module.exports = {student}

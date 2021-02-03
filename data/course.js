@@ -8,3 +8,4 @@ const course = [
   }
 ]
 
+module.exports = {course}
