@@ -1,7 +1,7 @@
 'use strict'
 // load dependencies
 const express = require('express')
-const studentRouter = require('./routes/studentRouter.js')
+// const studentRouter = require('./routes/studentRouter.js')
 const courseRouter = require('./routes/courseRouter.js')
 
 // create the express app
