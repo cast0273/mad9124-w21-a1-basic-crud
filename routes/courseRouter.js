@@ -7,9 +7,9 @@ router.use('/:courseId', validateCourseID)
 
 router.get('/', (req, res) => res.send({data: course}))
 
-router.get('/:courseId', (req, res)=>{
-  // const car = cars.find(car => car.id === parseInt(req.params.carId))
-  res.send({data: course[req.courseIndex]})
+router.get('/course/:courseId', (req, res)=>{
+  const specificCourse = course.find(specificCourse => specificCourse.id === parseInt(req.params.courseId))
+  res.send({data: specificCourse})
 })
 
 router.post('/api/course', (req, res) => {

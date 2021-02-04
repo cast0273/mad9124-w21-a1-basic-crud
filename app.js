@@ -11,8 +11,8 @@ const app = express()
 app.use(express.json())
 
 // define routes
-app.use('/api/student', studentRouter)
 app.use('/api/course', courseRouter)
+// app.use('/api/student', studentRouter)
 
 
 
