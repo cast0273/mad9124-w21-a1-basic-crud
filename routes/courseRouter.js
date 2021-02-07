@@ -9,7 +9,6 @@ router.get('/', (req, res) => res.send({data: course}))
 
 router.get('/:courseId', (req, res)=>{
   const selectedCourse = course.find(selectedCourse => selectedCourse.id === parseInt(req.params.courseId))
-  console.log(selectedCourse, selectedCourse.id);
   res.send({data: selectedCourse})
 })
 
@@ -29,11 +28,8 @@ router.put('/:courseId', (req, res) => {
   const {code, title, description, url} = req.body;
   const id = parseInt(req.params.courseId);
   const updatedCourse = { id, code, title, description, url};
-  console.log(updatedCourse, 1)
   course[req.courseIndex] = updatedCourse;
-  console.log(updatedCourse, 2)
   res.send({ data: updatedCourse });
-  console.log(updatedCourse, 3)
 });
 
 router.patch('/:courseId', (req, res) => {

@@ -1,49 +1,47 @@
 const express = require('express')
-const validateStudentID = require('../middleWare/validateStudentID')
+const validateStudentId = require('../middleWare/validateStudentId')
 const router = express.Router()
-const {student} = require('../data/student.js')
+const {student} = require('../data/student')
 
-router.use('/:student', validateStudentID)
+router.use('/:studentId', validateStudentId)
 
 router.get('/', (req, res) => res.send({data: student}))
 
-router.get('/student/:studentId', (req, res)=>{
-  const specificStudent = student.find(specificStudent => specificStudent.id === parseInt(req.params.student))
-  res.send({data: specificStudent})
+router.get('/:studentId', (req, res)=>{
+  const selectedStudent = student.find(selectedStudent => selectedStudent.id === parseInt(req.params.studentId))
+  res.send({data: selectedStudent})
 })
 
-router.post('/api/student', (req, res) => {
-  const {id, code, title, description, url} = req.body
+router.post('/', (req, res) => {
+  const {firstName, lastName, nickName, email} = req.body
   const newStudent = {
-    id: Date.now(),
-    code,
-    title,
-    description,
-    url
+    firstName,
+    lastName,
+    nickName,
+    email
   }
   student.push(newStudent)
   res.status(201).send({data: newStudent})
 })
 
-router.put('/api/student/:studentId', (req, res) => {
-  
-    const {code, title, description, url} = req.body
-    const updatedStudent = {id, code, title, description, url}
-    student[req.studentIndex] = updatedStudent
-    res.send({data: updatedStudent})
-  
-})
+router.put('/:studentId', (req, res) => {
+  const {firstName, lastName, nickName, email} = req.body;
+  const id = parseInt(req.params.studentId);
+  const updatedStudent = { id, firstName, lastName, nickName, email};
+  student[req.studentIndex] = updatedStudent;
+  res.send({ data: updatedStudent });
+});
 
-router.patch('/api/student/:studentId', (req, res) => {
+router.patch('/:studentId', (req, res) => {
   
     const {id, ...theRest} = req.body
-    const updatedStudent = Object.assign({}, student[index], theRest)
+    const updatedStudent = Object.assign({}, student[req.studentIndex], theRest)
     student[req.studentIndex] = updatedStudent
     res.send({data: updatedStudent})
   
 })
 
-router.delete('/api/student/:studentId', (req, res) => {
+router.delete('/:studentId', (req, res) => {
   
     // splice returns an array of the removed items
     const deletedStudent = student.splice(req.studentIndex, 1)

@@ -2,7 +2,7 @@ const {student} = require('../data/student.js')
 
 function validateStudentId(req, res, next) {
   const id = parseInt(req.params.studentId)
-  const index = student.findIndex(car => student.id === id)
+  const index = student.findIndex(student => student.id === id)
   if (index < 0) {
     res.status(404).send({
       errors: [
