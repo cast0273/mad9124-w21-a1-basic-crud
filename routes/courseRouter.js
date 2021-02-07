@@ -1,54 +1,54 @@
 const express = require('express')
-const validateCourseID = require('../middleWare/validateCourseID')
+const validateCourseId = require('../middleWare/validateCourseId')
 const router = express.Router()
-const {course} = require('../data/course.js')
+const {course} = require('../data/course')
 
-router.use('/:courseId', validateCourseID)
+router.use('/:courseId', validateCourseId)
 
 router.get('/', (req, res) => res.send({data: course}))
 
-router.get('/course/:courseId', (req, res)=>{
-  const specificCourse = course.find(specificCourse => specificCourse.id === parseInt(req.params.courseId))
-  res.send({data: specificCourse})
+router.get('/:courseId', (req, res)=>{
+  const selectedCourse = course.find(selectedCourse => selectedCourse.id === parseInt(req.params.courseId))
+  console.log(selectedCourse, selectedCourse.id);
+  res.send({data: selectedCourse})
 })
 
-router.post('/api/course', (req, res) => {
-  const {id, code, title, description, url} = req.body
-  const newCourse = {
-    id: Date.now(),
-    code,
-    title,
-    description,
-    url
-  }
-  course.push(newCourse)
-  res.status(201).send({data: newCourse})
-})
+// router.post('/', (req, res) => {
+//   const {make, model, colour} = req.body
+//   const newCar = {
+//     id: Date.now(),
+//     make,
+//     model,
+//     colour
+//   }
+//   cars.push(newCar)
+//   res.status(201).send({data: newCar})
+// })
 
-router.put('/api/course/:courseId', (req, res) => {
-  
-    const {code, title, description, url} = req.body
-    const updatedCourse = {id, code, title, description, url}
-    course[req.courseIndex] = updatedCourse
-    res.send({data: updatedCourse})
-  
-})
+// router.put('/:carId', (req, res) => {
+//   const { make, model, colour } = req.body;
+//   const id = parseInt(req.params.carId);
+//   const updatedCar = { id, make, model, colour };
 
-router.patch('/api/course/:courseId', (req, res) => {
-  
-    const {id, ...theRest} = req.body
-    const updatedCourse = Object.assign({}, course[index], theRest)
-    course[req.courseIndex] = updatedCourse
-    res.send({data: updatedCourse})
-  
-})
+//   cars[req.carIndex] = updatedCar;
+//   res.send({ data: updatedCar });
+// });
 
-router.delete('/api/course/:courseId', (req, res) => {
+// router.patch('/:carId', (req, res) => {
   
-    // splice returns an array of the removed items
-    const deletedCourse = course.splice(req.courseIndex, 1)
-    res.send({data: deletedCourse[0]})
+//     const {id, ...theRest} = req.body
+//     const updatedCar = Object.assign({}, cars[req.carIndex], theRest)
+//     cars[req.carIndex] = updatedCar
+//     res.send({data: updatedCar})
+  
+// })
 
-})
+// router.delete('/:carId', (req, res) => {
+  
+//     // splice returns an array of the removed items
+//     const deletedCars = cars.splice(req.carIndex, 1)
+//     res.send({data: deletedCars[0]})
+
+// })
 
 module.exports = router
