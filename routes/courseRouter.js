@@ -13,42 +13,44 @@ router.get('/:courseId', (req, res)=>{
   res.send({data: selectedCourse})
 })
 
-// router.post('/', (req, res) => {
-//   const {make, model, colour} = req.body
-//   const newCar = {
-//     id: Date.now(),
-//     make,
-//     model,
-//     colour
-//   }
-//   cars.push(newCar)
-//   res.status(201).send({data: newCar})
-// })
+router.post('/', (req, res) => {
+  const {code, title, description, url} = req.body
+  const newCourse = {
+    code,
+    title,
+    description,
+    url
+  }
+  course.push(newCourse)
+  res.status(201).send({data: newCourse})
+})
 
-// router.put('/:carId', (req, res) => {
-//   const { make, model, colour } = req.body;
-//   const id = parseInt(req.params.carId);
-//   const updatedCar = { id, make, model, colour };
+router.put('/:courseId', (req, res) => {
+  const {code, title, description, url} = req.body;
+  const id = parseInt(req.params.courseId);
+  const updatedCourse = { id, code, title, description, url};
+  console.log(updatedCourse, 1)
+  course[req.courseIndex] = updatedCourse;
+  console.log(updatedCourse, 2)
+  res.send({ data: updatedCourse });
+  console.log(updatedCourse, 3)
+});
 
-//   cars[req.carIndex] = updatedCar;
-//   res.send({ data: updatedCar });
-// });
-
-// router.patch('/:carId', (req, res) => {
+router.patch('/:courseId', (req, res) => {
   
-//     const {id, ...theRest} = req.body
-//     const updatedCar = Object.assign({}, cars[req.carIndex], theRest)
-//     cars[req.carIndex] = updatedCar
-//     res.send({data: updatedCar})
+    const {id, ...theRest} = req.body
+    const updatedCourse = Object.assign({}, course[req.carIndex], theRest)
+    course[req.courseIndex] = updatedCourse
+    res.send({data: updatedCourse})
   
-// })
+})
 
-// router.delete('/:carId', (req, res) => {
+router.delete('/:courseId', (req, res) => {
   
-//     // splice returns an array of the removed items
-//     const deletedCars = cars.splice(req.carIndex, 1)
-//     res.send({data: deletedCars[0]})
+    // splice returns an array of the removed items
+    const deletedCourse = course.splice(req.courseIndex, 1)
+    res.send({data: deletedCourse[0]})
 
-// })
+})
 
 module.exports = router
